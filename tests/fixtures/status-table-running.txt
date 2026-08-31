@@ -1,0 +1,11 @@
+<assistant-must-display>
+| # | Status | Session | Directory |
+|---|--------|---------|-----------|
+| 1 | running | project-one | ~/git/project-one |
+| 2 | running | project-two | ~/git/project-two |
+| 3 | running | > idle-compactor | ~/git/idle-compactor |
+| 4 | running | demo-two | ~/git/demo-two |
+| 5 | running | project-three | ~/git/project-three |
+
+5 running
+</assistant-must-display>

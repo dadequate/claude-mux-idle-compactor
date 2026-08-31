@@ -1,0 +1,11 @@
+⏺ Pushed. Let me report back.
+
+⏺ Done -- everything committed and pushed as described above.
+
+✻ Worked for 1m 9s
+                                        new task? /clear to save 239.9k tokens
+───────────────────────────────────────────────────────────── some-session ─────
+❯ check on the review status before we move on
+────────────────────────────────────────────────────────────────────────────────
+  [EXAMPLE]  Sonnet 5  ctx:24%  some-session                                  /rc
+  ⏵⏵ auto mode on (shift+tab to cycle) · ← 1 agent

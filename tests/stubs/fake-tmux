@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# fake-tmux -- stands in for the tmux binary in tests, so get_idle_seconds(),
+# session_has_live_tmux(), and the safety-gate capture-pane call can be tested
+# without any live tmux session.
+#
+# Controlled via env vars:
+#   FAKE_TMUX_SESSIONS       file listing existing exact session names, one per line
+#   FAKE_TMUX_ACTIVITY_MAP   file of "name=epoch" lines for `display ... window_activity`
+#   FAKE_TMUX_PANE_TEXT_DIR  dir of "<name>.txt" files for `capture-pane` output
+
+set -uo pipefail
+
+# Extract the bare session name from a "=name" or "=name:" target arg.
+strip_target() {
+    local t="$1"
+    t="${t#=}"
+    t="${t%:}"
+    echo "$t"
+}
+
+case "${1:-}" in
+    has-session)
+        target="${3:-}"
+        name="$(strip_target "$target")"
+        [[ -f "${FAKE_TMUX_SESSIONS:-/dev/null}" ]] || exit 1
+        grep -qxF "$name" "$FAKE_TMUX_SESSIONS" && exit 0
+        exit 1
+        ;;
+    display)
+        # display -p -t "=name:" '#{window_activity}'
+        target=""
+        for a in "$@"; do
+            case "$a" in
+                =*) target="$a" ;;
+            esac
+        done
+        name="$(strip_target "$target")"
+        [[ -f "${FAKE_TMUX_ACTIVITY_MAP:-/dev/null}" ]] || exit 0
+        awk -F'=' -v n="$name" '$1 == n { print $2 }' "$FAKE_TMUX_ACTIVITY_MAP"
+        exit 0
+        ;;
+    capture-pane)
+        target=""
+        for a in "$@"; do
+            case "$a" in
+                =*) target="$a" ;;
+            esac
+        done
+        name="$(strip_target "$target")"
+        fixture="${FAKE_TMUX_PANE_TEXT_DIR:-/dev/null}/${name}.txt"
+        [[ -f "$fixture" ]] && cat "$fixture"
+        exit 0
+        ;;
+    *)
+        echo "fake-tmux: unhandled args: $*" >&2
+        exit 1
+        ;;
+esac

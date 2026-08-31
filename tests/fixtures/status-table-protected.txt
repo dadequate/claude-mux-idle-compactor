@@ -1,0 +1,7 @@
+<assistant-must-display>
+| # | Status | Session | Directory |
+|---|--------|---------|-----------|
+| 1 | protected | home | ~/git |
+
+1 protected
+</assistant-must-display>

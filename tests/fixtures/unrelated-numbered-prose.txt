@@ -1,0 +1,17 @@
+⏺ Here's the plan:
+
+  1. Update the schema migration
+  2. Run the test suite
+  3. Deploy to staging
+
+  This should not be treated as a live confirmation menu -- it's just prose
+  Claude printed describing a plan, with no cursor glyph in front of it and no
+  confirm/cancel style footer beneath it.
+
+✻ Worked for 42s
+                                        new task? /clear to save 190.2k tokens
+───────────────────────────────────────────────────────────── some-session ─────
+❯
+────────────────────────────────────────────────────────────────────────────────
+  [EXAMPLE]  Sonnet 5  ctx:31%  some-session                                  /rc
+  ⏵⏵ auto mode on (shift+tab to cycle) · ← 1 agent
